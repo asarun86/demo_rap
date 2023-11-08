@@ -1,0 +1,111 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'DealPrice', 
+    typeNamePlural: 'DealPrices', 
+    title: {
+      type: #STANDARD, 
+      label: 'DealPrice', 
+      value: 'PriceLevel'
+    }
+  }, 
+  presentationVariant: [ {
+    sortOrder: [ {
+      by: 'PriceLevel', 
+      direction: #DESC
+    } ], 
+    visualizations: [ {
+      type: #AS_LINEITEM
+    } ]
+  } ]
+}
+annotate view ZPIBC_DealPriceTP with
+{
+  @UI.facet: [ {
+    id: 'idDealPrice', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'DealPrice', 
+    position: 10 
+  } ]
+  @UI.hidden: true
+  PriceUUID;
+  
+  @UI.hidden: true
+  ArticleUUID;
+  
+  @UI.hidden: true
+  DealUUID;
+  
+  @UI.lineItem: [ {
+    position: 40 , 
+    importance: #HIGH, 
+    label: 'PriceLevel'
+  } ]
+  @UI.identification: [ {
+    position: 40 , 
+    label: 'PriceLevel'
+  } ]
+  PriceLevel;
+  
+  @UI.lineItem: [ {
+    position: 50 , 
+    importance: #HIGH, 
+    label: 'ToPitch'
+  } ]
+  @UI.identification: [ {
+    position: 50 , 
+    label: 'ToPitch'
+  } ]
+  ToPitch;
+  
+  @UI.lineItem: [ {
+    position: 60 , 
+    importance: #HIGH, 
+    label: 'Valorisation'
+  } ]
+  @UI.identification: [ {
+    position: 60 , 
+    label: 'Valorisation'
+  } ]
+  Valorisation;
+  
+  @UI.lineItem: [ {
+    position: 80 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 80 
+  } ]
+  CreatedAt;
+  
+  @UI.lineItem: [ {
+    position: 90 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 90 
+  } ]
+  CreatedBy;
+  
+  @UI.lineItem: [ {
+    position: 100 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 100 
+  } ]
+  LastChangedBy;
+  
+  @UI.lineItem: [ {
+    position: 110 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 110 
+  } ]
+  LastChangedAt;
+  
+  @UI.hidden: true
+  LocalLastChangedAt;
+}

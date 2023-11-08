@@ -1,0 +1,77 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'ReferenceUserMaster', 
+    typeNamePlural: 'ReferenceUserMasters', 
+    title: {
+      type: #STANDARD, 
+      label: 'Reference User Master', 
+      value: 'UserId'
+    }
+  }
+}
+annotate view ZC_ReferenceUserMaster with
+{
+  @UI.identification: [ {
+    position: 1 , 
+    label: 'UserId'
+  } ]
+  @UI.lineItem: [ {
+    position: 1 , 
+    label: 'UserId'
+  }, 
+  {
+    type: #FOR_ACTION, 
+    dataAction: 'CopyReferenceUserMaster', 
+    label: 'Copy Selected Entry', 
+    invocationGrouping: #CHANGE_SET
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_ReferenceUserMaster', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Reference User Master', 
+    position: 1 
+  } ]
+  UserId;
+  
+  @UI.identification: [ {
+    position: 2 , 
+    label: 'UserName'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'UserName'
+  } ]
+  UserName;
+  
+  @UI.identification: [ {
+    position: 3 , 
+    label: 'Bu'
+  } ]
+  @UI.lineItem: [ {
+    position: 3 , 
+    label: 'Bu'
+  } ]
+  Bu;
+  
+  @UI.identification: [ {
+    position: 4 
+  } ]
+  CreatedAt;
+  
+  @UI.identification: [ {
+    position: 5 
+  } ]
+  CreatedBy;
+  
+  @UI.identification: [ {
+    position: 6 
+  } ]
+  LastChangedBy;
+  
+  @UI.identification: [ {
+    position: 7 
+  } ]
+  LastChangedAt;
+}

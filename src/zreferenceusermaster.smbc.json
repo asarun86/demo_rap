@@ -1,0 +1,35 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "Maintain Reference User Master",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "serviceConfiguration": {
+    "serviceBinding": "ZUI_REFERENCEUSERMASTER_O4",
+    "serviceName": "ZUI_REFERENCEUSERMASTER_O4",
+    "serviceVersion": "0001",
+    "rootEntitySet": "ReferenceUserMasAll",
+    "name": "Reference User Master",
+    "configurationGroup": "",
+    "skipRootEntity": true
+  },
+  "appConfiguration": {
+    "listReport": {},
+    "objectPages": [
+      {
+        "entitySet": "ReferenceUserMasAll",
+        "variantManagement": "control"
+      }
+    ],
+    "tableSettings": [
+      {
+        "entitySet": "ReferenceUserMaster",
+        "tableType": "gridTable",
+        "selectionMode": "single",
+        "creationModeName": "creationRow",
+        "rowCountMode": "auto"
+      }
+    ]
+  }
+}

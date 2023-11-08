@@ -1,0 +1,6 @@
+define service ZPIBUI_DealHeader {
+  expose ZPIBC_DealHeaderTP     as DealHeader;
+  expose ZPIBC_DealPosition01TP as DealPosition;
+  expose ZPIBC_DealPriceTP      as DealPrice;
+  expose I_Currency             as Currency;
+}

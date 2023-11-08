@@ -1,0 +1,147 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'DealPosition', 
+    typeNamePlural: 'DealPositions', 
+    title: {
+      type: #STANDARD, 
+      label: 'DealPosition', 
+      value: 'ArticleNo'
+    }
+  }, 
+  presentationVariant: [ {
+    sortOrder: [ {
+      by: 'ArticleNo', 
+      direction: #DESC
+    } ], 
+    visualizations: [ {
+      type: #AS_LINEITEM
+    } ]
+  } ]
+}
+annotate view ZPIBC_DealPosition01TP with
+{
+  @UI.facet: [ {
+    id: 'idDealPosition', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'DealPosition', 
+    position: 10 
+  }, 
+  {
+    id: 'idLineitem', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'DealPrice', 
+    position: 20 , 
+    targetElement: '_DealPrice'
+  },
+  { 
+  id:'fg2',
+  type: #FIELDGROUP_REFERENCE,
+  label: 'Deal Position',
+  position: 30,
+  parentId: 'idDealPosition'
+  } ]
+  @UI.hidden: true
+  ArticleUUID;
+  
+  @UI.hidden: true
+  DealUUID;
+  
+  @UI.lineItem: [ {
+    position: 30 , 
+    importance: #HIGH, 
+    label: 'ArticleNo'
+  } ]
+  @UI.identification: [ {
+    position: 30 , 
+    label: 'ArticleNo'
+  } ]
+  @UI.fieldGroup: [{ label: 'Article Number',position: 10,qualifier: 'fg2' }]
+  ArticleNo;
+  
+  @UI.lineItem: [ {
+    position: 40 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 40 
+  } ]
+   @UI.fieldGroup: [{ label: 'Delivery Plant',position: 20,qualifier: 'fg2' }]
+  DeliveryPlant;
+  
+  @UI.lineItem: [ {
+    position: 50 , 
+    importance: #HIGH, 
+    label: 'ProposedVolume'
+  } ]
+  @UI.identification: [ {
+    position: 50 , 
+    label: 'ProposedVolume'
+  } ]
+   @UI.fieldGroup: [{ label: 'Proposed Volume',position: 30,qualifier: 'fg2' }]
+  ProposedVolume;
+  
+  @UI.lineItem: [ {
+    position: 60 , 
+    importance: #HIGH, 
+    label: 'ActualVolume'
+  } ]
+  @UI.identification: [ {
+    position: 60 , 
+    label: 'ActualVolume'
+  } ]
+  @UI.fieldGroup: [{ label: 'Actual Volume',position: 40,qualifier: 'fg2' }]
+  ActualVolume;
+  
+  @UI.lineItem: [ {
+    position: 70 , 
+    importance: #HIGH, 
+    label: 'Deviation'
+  } ]
+  @UI.identification: [ {
+    position: 70 , 
+    label: 'Deviation'
+  } ]
+  @UI.fieldGroup: [{ label: 'Deviation',position: 50,qualifier: 'fg2' }]
+  Deviation;
+  
+  @UI.lineItem: [ {
+    position: 90 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 90 
+  } ]
+  CreatedAt;
+  
+  @UI.lineItem: [ {
+    position: 100 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 100 
+  } ]
+  CreatedBy;
+  
+  @UI.lineItem: [ {
+    position: 110 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 110 
+  } ]
+  LastChangedBy;
+  
+  @UI.lineItem: [ {
+    position: 120 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 120 
+  } ]
+  LastChangedAt;
+  
+  @UI.hidden: true
+  LocalLastChangedAt;
+}

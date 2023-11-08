@@ -1,0 +1,4 @@
+define service ZUI_REFERENCECUSTOMERMA {
+  expose ZC_REFERENCECUSTOMERMA_S as ReferenceCustomeAll;
+  expose ZC_REFERENCECUSTOMERMA as ReferenceCustomerMa;
+}

@@ -1,0 +1,87 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'ReferenceCustomerMa', 
+    typeNamePlural: 'ReferenceCustomerMas', 
+    title: {
+      type: #STANDARD, 
+      label: 'Reference Customer Master', 
+      value: 'Customer'
+    }
+  }
+}
+annotate view ZC_ReferenceCustomerMa with
+{
+  @UI.identification: [ {
+    position: 1 , 
+    label: 'Customer'
+  } ]
+  @UI.lineItem: [ {
+    position: 1 , 
+    label: 'Customer'
+  }, 
+  {
+    type: #FOR_ACTION, 
+    dataAction: 'CopyReferenceCustomerMa', 
+    label: 'Copy Selected Entry', 
+    invocationGrouping: #CHANGE_SET
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_ReferenceCustomerMa', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Reference Customer Master', 
+    position: 1 
+  } ]
+  Customer;
+  
+    @UI.identification: [ {
+    position: 2 , 
+    label: 'PartnerFunction'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'PartnerFunction'
+  } ]
+  PartnerFunction;
+  
+  @UI.identification: [ {
+    position: 3 , 
+    label: 'CustomerName'
+  } ]
+  @UI.lineItem: [ {
+    position: 3 , 
+    label: 'CustomerName'
+  } ]
+  CustomerName;
+  
+  @UI.identification: [ {
+    position: 4 , 
+    label: 'CustomerRole'
+  } ]
+  @UI.lineItem: [ {
+    position: 4 , 
+    label: 'CustomerRole'
+  } ]
+  CustomerRole;
+  
+  @UI.identification: [ {
+    position: 5 
+  } ]
+  CreatedAt;
+  
+  @UI.identification: [ {
+    position: 6 
+  } ]
+  CreatedBy;
+  
+  @UI.identification: [ {
+    position: 7 
+  } ]
+  LastChangedBy;
+  
+  @UI.identification: [ {
+    position: 8 
+  } ]
+  LastChangedAt;
+}

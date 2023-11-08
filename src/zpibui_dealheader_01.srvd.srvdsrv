@@ -1,0 +1,9 @@
+@EndUserText.label: 'Service Definition for DealHeader Version 01'
+define service ZPIBUI_DEALHEADER_01 {
+  expose ZPIBC_DealHeaderTP        as DealHeader;
+  expose ZPIBC_DealPosition01TP    as DealPosition;
+  expose ZPIBC_DealPriceTP         as DealPrice;
+  expose I_Currency                as Currency;
+  expose ZIPIB_REFERENCEUSERMASTER as UserMaster;
+  expose ZPIBI_Referencecustomerma as CustomerMaster;
+}

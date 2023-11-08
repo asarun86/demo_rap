@@ -1,0 +1,77 @@
+managed with additional save implementation in class ZBP_I_REFERENCECUSTOMERMA_S unique;
+strict;
+with draft;
+
+define behavior for ZI_ReferenceCustomerMa_S alias ReferenceCustomeAll
+draft table ZPIB_REF_CUS_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  field ( readonly )
+   SingletonID;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _ReferenceCustomerMa { create ( features : instance ); with draft; }
+}
+
+define behavior for ZI_ReferenceCustomerMa alias ReferenceCustomerMa
+persistent table ZPIB_REF_CUS
+draft table ZPIB_REF_CUS_D
+etag master LocalLastChangedAt
+lock dependent by _ReferenceCustomeAll
+authorization dependent by _ReferenceCustomeAll
+
+{
+  field ( mandatory : create )
+   Customer,
+   PartnerFunction;
+
+
+  field ( readonly )
+   SingletonID,
+   CreatedAt,
+   CreatedBy,
+   LastChangedBy,
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   Customer,
+   PartnerFunction;
+
+
+  update( features : global );
+  delete( features : global );
+
+  factory action ( features : instance ) CopyReferenceCustomerMa parameter ZD_CopyRefCusMasterP [1];
+
+  mapping for ZPIB_REF_CUS
+  {
+    Customer = CUSTOMER;
+    CustomerName = CUSTOMER_NAME;
+    CustomerRole = CUSTOMER_ROLE;
+    PartnerFunction = PARTNER_FUNCTION;
+    CreatedAt = CREATED_AT;
+    CreatedBy = CREATED_BY;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _ReferenceCustomeAll { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

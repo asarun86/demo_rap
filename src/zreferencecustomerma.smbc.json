@@ -1,0 +1,34 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "Maintain Reference Customer Master",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "serviceConfiguration": {
+    "serviceBinding": "ZUI_REFERENCECUSTOMERMA_O4",
+    "serviceName": "ZUI_REFERENCECUSTOMERMA_O4",
+    "serviceVersion": "0001",
+    "rootEntitySet": "ReferenceCustomeAll",
+    "name": "Reference Customer Master",
+    "configurationGroup": "",
+    "skipRootEntity": true
+  },
+  "appConfiguration": {
+    "listReport": {},
+    "objectPages": [
+      {
+        "entitySet": "ReferenceCustomeAll",
+        "variantManagement": "control"
+      }
+    ],
+    "tableSettings": [
+      {
+        "entitySet": "ReferenceCustomerMa",
+        "selectionMode": "single",
+        "creationModeName": "creationRow",
+        "rowCountMode": "auto"
+      }
+    ]
+  }
+}

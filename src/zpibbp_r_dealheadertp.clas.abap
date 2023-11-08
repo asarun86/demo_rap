@@ -1,0 +1,15 @@
+CLASS zpibbp_r_dealheadertp DEFINITION
+  PUBLIC
+  ABSTRACT
+  FINAL
+  FOR BEHAVIOR OF zpibr_dealheadertp .
+
+  PUBLIC SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zpibbp_r_dealheadertp IMPLEMENTATION.
+ENDCLASS.

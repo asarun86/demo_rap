@@ -1,0 +1,377 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'DealHeader', 
+    typeNamePlural: 'DealHeaders', 
+    title: {
+      type: #STANDARD, 
+      label: 'DealHeader', 
+      value: 'DealID'
+    }
+  }, 
+  presentationVariant: [ {
+    sortOrder: [ {
+      by: 'DealID', 
+      direction: #DESC
+    } ], 
+    visualizations: [ {
+      type: #AS_LINEITEM
+    } ]
+  } ]
+}
+annotate view ZPIBC_DealHeaderTP with
+{
+  @UI.facet: [ {
+    id: 'idCollection', 
+    type: #COLLECTION, 
+    label: 'DealHeader', 
+    position: 10 
+  }, 
+//  { label: 'Sell to Party', 
+//    id: 'SellToParty',
+//    purpose: #STANDARD,
+//    parentId: 'idIdentification',
+//    type: #FIELDGROUP_REFERENCE,
+//    position: 10,
+//    targetQualifier: 'SellToParty'
+//  },
+//  {
+//    id: 'idIdentification', 
+//    parentId: 'idCollection', 
+//    type: #IDENTIFICATION_REFERENCE, 
+//    label: 'General Information', 
+//    position: 10 
+//  },   
+  {
+    id: 'idLineitem', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'DealPosition', 
+    position: 20 , 
+    targetElement: '_DealPosition'
+  },
+  { 
+  targetQualifier: 'fg1',
+  type: #FIELDGROUP_REFERENCE,
+  label: 'Deal-ID',
+  position: 30,
+  parentId: 'idCollection'
+  },
+//  { 
+//  id:'fg2',
+//  type: #FIELDGROUP_REFERENCE,
+//  label: 'Status',
+//  position: 40,
+//  parentId: 'idCollection'
+//  },
+  { 
+  targetQualifier: 'fg3',
+  type: #FIELDGROUP_REFERENCE,
+  label: 'User Data',
+  position: 50,
+  parentId: 'idCollection'
+  },
+  { 
+  targetQualifier: 'fg4',
+  type: #FIELDGROUP_REFERENCE,
+  label: 'Sales Rep.Data',
+  position: 60,
+  parentId: 'idCollection'
+  }
+  
+  ]
+  @UI.hidden: true
+  DealUUID;
+  
+  @UI.lineItem: [ {
+    position: 20 , 
+    importance: #HIGH, 
+    label: 'Deal ID'
+  } ]
+  @UI.identification: [ {
+    position: 20 , 
+    label: 'Deal ID'
+  },
+  { 
+  type: #FOR_ACTION,
+  dataAction: 'Submit',
+  label: 'Submit',
+  position: 10
+   } ]
+  @UI.selectionField: [ {
+    position: 20 
+  } ]
+  @UI.fieldGroup: [{ label: 'Deal ID', position: 10,qualifier: 'fg1' }]
+  DealID;
+    
+  @UI.lineItem: [ {
+    position: 25 , 
+    importance: #HIGH, 
+    label: 'Creator ID'
+  } ]
+  @UI.identification: [ {
+    position: 25 , 
+    label: 'Creator ID'
+  } ]
+  @UI.selectionField: [ {
+    position: 25 
+  } ]
+  @UI.fieldGroup: [{ label: 'Id', position: 10,qualifier: 'fg3' }]
+  Creator;
+
+  @UI.lineItem: [ {
+    position: 26 ,  
+    label: 'User'
+  } ]
+  @UI.identification: [ {
+    position: 26 , 
+    label: 'User'
+  } ]
+  @UI.selectionField: [ {
+    position: 26     
+  } ]
+  @UI.fieldGroup: [{ label: 'User', position: 20,qualifier: 'fg3' }]
+  UserName;
+  
+  @UI.lineItem: [ {
+    position: 27 ,  
+    label: 'BU'
+  } ]
+  @UI.identification: [ {
+    position: 27 , 
+    label: 'BU'
+  } ]
+  @UI.fieldGroup: [{ label: 'BU', position: 30,qualifier: 'fg3' }]
+  UserBU;
+    
+  @UI.lineItem: [ {
+    position: 30 , 
+    importance: #HIGH,
+    label: 'Same as user data'
+  } ]
+  @UI.identification: [ {
+    position: 30,
+    label: 'Same as user data' 
+  } ]
+  @UI.fieldGroup: [{ label: 'same as user data', position: 10,qualifier: 'fg4' }]
+  SrSameAsCreator;
+  
+  @UI.lineItem: [ {
+    position: 40 , 
+    importance: #HIGH, 
+    label: 'Sales Rep'
+  } ]
+  @UI.identification: [ {
+    position: 40 , 
+    label: 'Sales Rep'
+  } ]
+  @UI.selectionField: [ {
+    position: 40     
+  } ]
+  @UI.fieldGroup: [{ label: 'Id', position: 20,qualifier: 'fg4' }]
+  SalesRep;
+
+  @UI.lineItem: [ {
+    position: 41 ,  
+    label: 'User'
+  } ]
+  @UI.identification: [ {
+    position: 41 , 
+    label: 'User'
+  } ]
+  @UI.fieldGroup: [{ label: 'Sales Rep', position: 30,qualifier: 'fg4' }]
+  SaleRepName;
+  
+  @UI.lineItem: [ {
+    position: 42 ,  
+    label: 'BU'
+  } ]
+  @UI.identification: [ {
+    position: 42 , 
+    label: 'BU'
+  } ]
+  @UI.fieldGroup: [{ label: 'BU', position: 40,qualifier: 'fg4' }]
+  SalesRepBU;
+    
+  @UI.lineItem: [ {
+    position: 50 , 
+    importance: #HIGH,
+    label: 'New Customer'
+  } ]
+  @UI.identification: [ {
+    position: 50,
+    label: 'New Customer' 
+  } ]
+  NewCustomer;
+  
+  @UI.lineItem: [ {
+    position: 60 , 
+    importance: #HIGH, 
+    label: 'SAP Customer Id'
+  } ]
+  @UI.identification: [ {
+    position: 60 , 
+    label: 'SAP Customer Id'
+  } ]
+  SoldToParty;
+  
+  @UI.lineItem: [ {
+    position: 61 ,  
+    label: 'Customer Name'
+  } ]
+  @UI.identification: [ {
+    position: 61 , 
+    label: 'Customer Name'
+  } ]
+  SoldToCustomerName;
+  
+  @UI.lineItem: [ {
+    position: 62 ,  
+    label: 'Customer Role'
+  } ]
+  @UI.identification: [ {
+    position: 62 , 
+    label: 'Customer Role'
+  } ]
+  SoldToCustomerRole;
+  
+  @UI.lineItem: [ {
+    position: 70 , 
+    importance: #HIGH, 
+    label: 'Customer ID'
+  } ]
+  @UI.identification: [ {
+    position: 70 , 
+    label: 'Customer ID'
+//    qualifier: 'SellToParty'
+  } ]
+  ShipToParty;
+
+  @UI.lineItem: [ {
+    position: 71 ,  
+    label: 'Customer Name'
+  } ]
+  @UI.identification: [ {
+    position: 71 , 
+    label: 'Customer Name'
+//    qualifier: 'SellToParty'
+  } ]
+  ShipToCustomerName;
+  
+  @UI.lineItem: [ {
+    position: 72 ,  
+    label: 'Customer Role'
+  } ]
+  @UI.identification: [ {
+    position: 72 , 
+    label: 'Customer Role'
+//    qualifier: 'SellToParty'
+  } ]
+  ShipToCustomerRole;
+    
+  @UI.lineItem: [ {
+    position: 80 , 
+    importance: #HIGH,
+    label: 'Vol Digestion'
+  } ]
+  @UI.identification: [ {
+    position: 80,    
+    label: 'Vol Digestion' 
+  } ]
+  VolumeDigestion;
+  
+  @UI.lineItem: [ {
+    position: 90 , 
+    importance: #HIGH,
+    label: 'Contract Date'
+  } ]
+  @UI.identification: [ {
+    position: 90, 
+    label: 'Contract Date'
+  } ]
+  @UI.selectionField: [ {
+    position: 90     
+  } ]
+  OfferDate;
+  
+  @UI.lineItem: [ {
+    position: 100 , 
+    importance: #HIGH,
+    label: 'Contract Start'
+  } ]
+  @UI.identification: [ {
+    position: 100,
+    label: 'Contract Start' 
+  } ]
+  @UI.selectionField: [ {
+    position: 100     
+  } ]
+  ContractStartDate;  
+  
+  @UI.lineItem: [ {
+    position: 110 , 
+    importance: #HIGH,
+    label: 'Contract End'
+  } ]
+  @UI.identification: [ {
+    position: 110,
+    label: 'Contract End' 
+  } ]
+  @UI.selectionField: [ {
+    position: 110     
+  } ]
+  ContractEndDate;
+  
+  @UI.lineItem: [ {
+    position: 120 , 
+    importance: #HIGH, 
+    label: 'ContractDuration'
+  } ]
+  @UI.identification: [ {
+    position: 120 , 
+    label: 'ContractDuration'
+  } ]
+  ContractDuration;
+  
+  @UI.lineItem: [ {
+    position: 121 , 
+    importance: #HIGH, 
+    label: 'Contract Length'
+  } ]
+  @UI.identification: [ {
+    position: 121 , 
+    label: 'Contract Length'
+  } ]
+  TotalDuration;
+  
+  @UI.lineItem: [ {
+    position: 130 , 
+    importance: #HIGH, 
+    label: 'TargetMilkPricegoal'
+  } ]
+  @UI.identification: [ {
+    position: 130 , 
+    label: 'TargetMilkPricegoal'
+  } ]
+  TargetMilkPricegoal;
+  
+//  @UI.selectionField: [ {
+//    position: 140 
+//  } ]
+  @UI.hidden: true
+  Currency;
+
+  @UI.hidden: true
+  CreatedBy;
+    
+  @UI.hidden: true
+  CreatedAt;  
+  
+  @UI.hidden: true
+  LastChangedBy;
+  
+  @UI.hidden: true
+  LastChangedAt;
+  
+  @UI.hidden: true
+  LocalLastChangedAt;
+}

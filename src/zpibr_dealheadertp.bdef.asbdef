@@ -1,0 +1,175 @@
+managed;
+//implementation in class zpibbp_r_dealheadertp unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZPIBR_DealHeaderTP alias DealHeader
+implementation in class ZPIBBP_R_DealHeaderTP unique
+persistent table ZPIB_DEAL_ROOT
+draft table ZPIBDEALHEADE00D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+//late numbering
+
+{
+  field ( readonly )
+   DealID,
+   CreatedAt,
+   CreatedBy,
+   LastChangedBy,
+   LastChangedAt,
+   LocalLastChangedAt,
+   ContractDuration;
+
+  field ( numbering : managed )
+   DealUUID;
+//  internal save (adjustnumbers) action GetNumebrForDealId;
+//  save ( adjustnumbers ) action GetNumebrForDealId;
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  side effects { field Creator affects $self ;
+                 field SalesRep affects $self ;
+                 field SoldToParty affects $self ;
+                 field ShipToParty affects $self ;
+                 field ContractStartDate affects field ContractDuration ;
+                 field ContractEndDate affects field ContractDuration ;
+                 field SrSameAsCreator affects field SalesRep ;
+                 }
+  mapping for ZPIB_DEAL_ROOT
+  {
+    DealUUID = DEAL_UUID;
+    DealID = DEAL_ID;
+    Creator = CREATOR;
+    SrSameAsCreator = SR_SAME_AS_CREATOR;
+    SalesRep = SALES_REP;
+    SoldToParty = SOLD_TO_PARTY;
+    ShipToParty = SHIP_TO_PARTY;
+    VolumeDigestion = VOLUME_DIGESTION;
+    OfferDate = OFFER_DATE;
+    ContractStartDate = CONTRACT_START_DATE;
+    ContractEndDate = CONTRACT_END_DATE;
+    ContractDuration = CONTRACT_DURATION;
+    TargetMilkPricegoal = TARGET_MILK_PRICEGOAL;
+    Currency = CURRENCY;
+    CreatedAt = CREATED_AT;
+    CreatedBy = CREATED_BY;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    NewCustomer = IS_NEW_CUSTOMER;
+  }
+
+  association _DealPosition { create; with draft; }
+
+  determination CalculateDealID on save { create; }
+  determination CalculateContractDuration on modify { field ContractStartDate, ContractEndDate ; }
+  determination UpdateSalesRepWithUserData on modify { field SrSameAsCreator ; }
+
+  action Submit;
+}
+
+define behavior for ZPIBR_DealPosition01TP alias DealPosition
+implementation in class ZPIBBP_R_DealPosition01TP unique
+persistent table ZPIB_DEAL_ITEMS
+draft table ZPIBDEALPOSIT00D
+etag master LocalLastChangedAt
+lock dependent by _DealHeader
+authorization dependent by _DealHeader
+
+{
+  field ( readonly )
+   DealUUID,
+   ArticleUUID,
+   CreatedAt,
+   CreatedBy,
+   LastChangedBy,
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( numbering : managed )
+   ArticleUUID;
+
+
+  update;
+  delete;
+
+  mapping for ZPIB_DEAL_ITEMS
+  {
+    ArticleUUID = ARTICLE_UUID;
+    DealUUID = DEAL_UUID;
+    ArticleNo = ARTICLE_NO;
+    DeliveryPlant = DELIVERY_PLANT;
+    ProposedVolume = PROPOSED_VOLUME;
+    ActualVolume = ACTUAL_VOLUME;
+    Deviation = DEVIATION;
+    Currency = CURRENCY;
+    CreatedAt = CREATED_AT;
+    CreatedBy = CREATED_BY;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _DealHeader { with draft; }
+  association _DealPrice { create; with draft; }
+
+  determination CalculateArticleNo on save { create; }
+}
+
+define behavior for ZPIBR_DealPriceTP alias DealPrice
+implementation in class ZPIBBP_R_DealPriceTP unique
+persistent table ZPIB_PRICE_VAL
+draft table ZPIBDEALPRICE00D
+etag master LocalLastChangedAt
+lock dependent by _DealHeader
+authorization dependent by _DealHeader
+
+{
+  field ( readonly )
+   ArticleUUID,
+   DealUUID,
+   PriceUUID,
+   PriceLevel,
+   CreatedAt,
+   CreatedBy,
+   LastChangedBy,
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( numbering : managed )
+   PriceUUID;
+
+
+  update;
+  delete;
+
+  mapping for ZPIB_PRICE_VAL
+  {
+    PriceUUID = PRICE_UUID;
+    ArticleUUID = ARTICLE_UUID;
+    DealUUID = DEAL_UUID;
+    PriceLevel = PRICE_LEVEL;
+    ToPitch = TO_PITCH;
+    Valorisation = VALORISATION;
+    Currency = CURRENCY;
+    CreatedAt = CREATED_AT;
+    CreatedBy = CREATED_BY;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _DealPosition { with draft; }
+  association _DealHeader { with draft; }
+
+  determination CalculatePriceLevel on save { create; }
+}

@@ -1,0 +1,4 @@
+define service ZUI_REFERENCEUSERMASTER {
+  expose ZC_REFERENCEUSERMASTER_S as ReferenceUserMasAll;
+  expose ZC_REFERENCEUSERMASTER as ReferenceUserMaster;
+}

@@ -1,0 +1,42 @@
+projection;
+strict ( 2 );
+use draft;
+use side effects;
+define behavior for ZPIBC_DealHeaderTP alias DealHeader
+use etag
+
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _DealPosition { create; with draft; }
+}
+
+define behavior for ZPIBC_DealPosition01TP alias DealPosition
+use etag
+
+{
+  use update;
+  use delete;
+
+  use association _DealHeader { with draft; }
+  use association _DealPrice { create; with draft; }
+}
+
+define behavior for ZPIBC_DealPriceTP alias DealPrice
+use etag
+
+{
+  use update;
+  use delete;
+
+  use association _DealHeader { with draft; }
+  use association _DealPosition { with draft; }
+}
